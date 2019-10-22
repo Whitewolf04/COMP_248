@@ -1,9 +1,9 @@
 package Assignments;
-//-----------------------------------------------
+// -----------------------------------------------
 // Assignment 1 - Question 2
 // Written by: Minh Tuan To - 40114920
 // For COMP 248 Section EC A - Fall 2019
-//-----------------------------------------------
+// -----------------------------------------------
 
 import java.util.Scanner;
 public class Assignment1Question2 {

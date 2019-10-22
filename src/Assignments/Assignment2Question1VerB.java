@@ -1,5 +1,11 @@
 package Assignments;
 
+// ------------------------------------------------------------
+// Assignment 2 Question 1 Version B (using switch statement)
+// Written by Tuan To - 40114920
+// For COMP 248 Section EC A - Fall 2019
+// ------------------------------------------------------------
+
 import java.util.Scanner;
 public class Assignment2Question1VerB {
 
