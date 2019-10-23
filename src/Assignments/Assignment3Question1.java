@@ -81,40 +81,54 @@ public class Assignment3Question1 {
 		String[] chosenLine, chosenWords = new String[3];
 		String password, printPassword, printNewline, printSingle, printEqual, printLength, printUpper, printLower, printSpecial;
 		String upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", lowerLetters = "abcdefghijklmnopqrstuvwxyz";
+		String specialCharacters = ";.,\"!#$@%^&*()+_-=/\\:;<>?`[]~";
 		
 		// 2. Core logic:
+		// Loop until 10,000 passwords are reached or count lower > 0
 		while(stop != true) {
+			// Loop through the string array to pick out 3 random words
 			while (count < 3) {
 				page = r.nextInt(3);
 				paragraph = r.nextInt(book[page].length);
 				line = r.nextInt(book[page][paragraph].length);
 			
+				// Choose out 1 line
 				chosenLine = book[page][paragraph][line].split(" ");
+				// Pick 1 word on that line
 				word = r.nextInt(chosenLine.length);
 			
+				// Check if the word is only a single character
 				if (chosenLine[word].length() == 1) {
 					countSingle += 1;
 					continue;
-				} else if(chosenLine[word].contains("\n") == true) {
+				} // Check if the word contains a newline character 
+				else if(chosenLine[word].contains("\n") == true) {
 					countNewline += 1;
 					continue;
 				}
 			
+				// After the conditions are satisfied, put the word in the chosenWords array
 				chosenWords[count] = chosenLine[word];
 				count += 1;
 			}
+			
+			// After 3 words are chosen, restart the count for the next loop
 			count = 0;
 			
+			// Concatenate the three chosen words from the string array
 			password = chosenWords[0].concat(chosenWords[1]).concat(chosenWords[2]);
 			
 			// Check if two words in the passwords are the same
+			// Check if the first two words are the same
 			if (chosenWords[0].compareTo(chosenWords[1]) == 0) {
 				countEqual += 1;
 				continue;
-			} else if (chosenWords[1].compareTo(chosenWords[2]) == 0) {
+			} // Check if the last two words are the same
+			else if (chosenWords[1].compareTo(chosenWords[2]) == 0) {
 				countEqual += 1;
 				continue;
-			} else if (chosenWords[0].compareTo(chosenWords[2]) == 0) {
+			} // Check if the first and last words are the same 
+			else if (chosenWords[0].compareTo(chosenWords[2]) == 0) {
 				countEqual += 1;
 				continue;
 			}
@@ -127,13 +141,18 @@ public class Assignment3Question1 {
 			
 			// Check if the passwords contains an upper-case character
 			boolean containsUpper = false;
+			// Loop all the characters in the password created
 			for (int p = 0; p < password.length(); p++) {
+				// Loop all the characters in the alphabet that are upper-case
 				for(int u = 0; u < 26; u++) {
+					// If the password contains upper-case character, set containsUpper to true
 					if (password.substring(p, p+1).compareTo(upperLetters.substring(u, u+1)) == 0) {
 						containsUpper = true;
 					}
 				}
 			}
+			
+			// If the password doesn't contain any upper-case character, restart the bigger loop
 			if (containsUpper == false) {
 				countUpper += 1;
 				continue;
@@ -141,13 +160,18 @@ public class Assignment3Question1 {
 			
 			// Check if the passwords contain a lower-case character
 			boolean containsLower = false;
+			// Loop all the characters in the password created
 			for (int p = 0; p < password.length(); p++) {
+				// Loop all the characters in the alphabet that are lower-case
 				for (int l = 0; l < 26; l++) {
+					// If the password contains lower-case character, set containsLower as true
 					if (password.substring(p, p+1).compareTo(lowerLetters.substring(l, l+1)) == 0) {
 						containsLower = true;
 					}
 				}
 			}
+			
+			// If password doesn't contain any lower case character, restart the bigger loop
 			if (containsLower = false) {
 				countLower += 1;
 				continue;
@@ -156,8 +180,8 @@ public class Assignment3Question1 {
 			// Check if the passwords contain only one special character
 			int specialCharacter = 0;
 			for (int p = 0; p < password.length(); p++) {
-				for (int s = 0; s < 26; s++) {
-					if (password.substring(p, p+1).compareTo(lowerLetters.substring(s, s+1)) != 0 && password.substring(p, p+1).compareTo(upperLetters.substring(s, s+1)) != 0) {
+				for (int s = 0; s < 29; s++) {
+					if (password.substring(p, p+1).compareTo(specialCharacters.substring(s, s+1)) == 0) {
 						specialCharacter += 1;
 					}
 				}
@@ -167,6 +191,7 @@ public class Assignment3Question1 {
 				continue;
 			}
 			
+			// 3. Output:
 			printPassword = String.format("Password = %s", password);
 			printNewline = String.format("Newline = %d", countNewline);
 			printSingle = String.format("Single = %d", countSingle);
@@ -176,10 +201,19 @@ public class Assignment3Question1 {
 			printLower = String.format("Lower = %d",  countLower);
 			printSpecial = String.format("Special = %d",  countSpecial);
 			
-			System.out.format("Password = %s Newline = %d Single = %d Equal = %d Length = %d Upper = %d Lower = %d Special = %d\n", password, countNewline, countSingle, countEqual, countLength, countUpper, countLower, countSpecial);
+			System.out.println(printPassword + "\t"
+					+ printNewline + "\t"
+					+ printSingle + "\t"
+					+ printEqual + "\t"
+					+ printLength + "\t"
+					+ printUpper + "\t"
+					+ printLower + "\t"
+					+ printSpecial);
 			
+			// Keep track of the number of passwords have been created
 			countTotal += 1;
 			
+			// Check if 10,000 passwords have been created or count lower is larger than 0
 			if (countTotal == 10000 || countLower > 0)
 				stop = true;
 		
