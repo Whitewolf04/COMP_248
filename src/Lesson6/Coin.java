@@ -7,6 +7,7 @@ public class Coin {
 	
 	public void flip() {
 		face = (int)(Math.random()*2);
+		return; // This return can be written or not written because void method does not return any value
 	}
 	
 	public boolean isHead() {
