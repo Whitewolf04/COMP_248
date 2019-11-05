@@ -1,5 +1,11 @@
 package Assignments;
 
+//----------------------------------------------
+//Assignment 3 - Question 1
+//Written by: Minh Tuan To - 40114920
+//For COMP 248 Section EC  - Fall 2019
+//----------------------------------------------
+
 import java.util.Random;
 public class Assignment3Question1 {
 
@@ -75,13 +81,21 @@ public class Assignment3Question1 {
 				}
 				};
 		Random r = new Random();
+		// Count variables for counting how many passwords have been passed before reaching the current one
 		int page, paragraph, line, word, count = 0, countNewline = 0, countSingle = 0, countEqual = 0;
 		int countLength = 0, countUpper = 0, countLower = 0, countSpecial = 0, countTotal = 0;
+		// Stop variable for end of loop
 		boolean stop = false;
+		// String variable for choosing words before concatenating into a password
 		String[] chosenLine, chosenWords = new String[3];
+		// String variables for print formatting
 		String password, printPassword, printNewline, printSingle, printEqual, printLength, printUpper, printLower, printSpecial;
+		// String variables containing upper case characters, lower case characters, and special characters
 		String upperLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ", lowerLetters = "abcdefghijklmnopqrstuvwxyz";
-		String specialCharacters = ";.,\"!#$@%^&*()+_-=/\\:;<>?`[]~";
+		String specialCharacters = ";.,\"!#$@%^&*(')+_-=/\\:;<>?`[]~";
+		
+		// Welcome banner
+		System.out.println("Welcome to the password generator game!\n");
 		
 		// 2. Core logic:
 		// Loop until 10,000 passwords are reached or count lower > 0
@@ -134,7 +148,7 @@ public class Assignment3Question1 {
 			}
 			
 			// Check if the length of the passwords is between 8-16
-			if (password.length() < 8 || password.length() > 16) {
+			if (password.length() <= 8 || password.length() > 16) {
 				countLength += 1;
 				continue;
 			}
@@ -186,39 +200,54 @@ public class Assignment3Question1 {
 					}
 				}
 			}
+			
+			// If password contains more or less than 1 special character, restart the bigger loop
 			if (specialCharacter != 1) {
 				countSpecial += 1;
 				continue;
 			}
 			
 			// 3. Output:
-			printPassword = String.format("Password = %s", password);
-			printNewline = String.format("Newline = %d", countNewline);
-			printSingle = String.format("Single = %d", countSingle);
-			printEqual = String.format("Equal = %d", countEqual);
-			printLength = String.format("Length = %d", countLength);
-			printUpper = String.format("Upper = %d",  countUpper);
-			printLower = String.format("Lower = %d",  countLower);
-			printSpecial = String.format("Special = %d",  countSpecial);
+			// Add 1 tab to passwords with length under 12 for nice formatting
+			if (password.length() <= 12)
+				printPassword = "Password = " + password + "\t";
+			else
+				printPassword = "Password = " + password;
+			printNewline = "Newline = " + countNewline;
+			printSingle = "Single = " + countSingle;
+			printEqual = "Equal = " + countEqual;
+			printLength = "Length = " + countLength;
+			printUpper = "Upper = " + countUpper;
+			printLower = "Lower = " + countLower;
+			printSpecial = "Special = " + countSpecial;
 			
-			System.out.println(printPassword + "\t"
-					+ printNewline + "\t"
-					+ printSingle + "\t"
-					+ printEqual + "\t"
-					+ printLength + "\t"
-					+ printUpper + "\t"
-					+ printLower + "\t"
-					+ printSpecial);
+			// Format the string printed
+			String result = String.format("%1$s \t %2$s \t %3$s \t %4$s \t %5$s \t %6$s \t %7$s \t %8$s", 
+					printPassword, printNewline, printSingle, printEqual, printLength, printUpper, printLower, printSpecial);
+			System.out.println(result);
 			
 			// Keep track of the number of passwords have been created
 			countTotal += 1;
 			
+			
 			// Check if 10,000 passwords have been created or count lower is larger than 0
 			if (countTotal == 10000 || countLower > 0)
 				stop = true;
+			
+			// Reset all counts after printing one password
+			countEqual = 0;
+			countNewline = 0;
+			countSingle = 0;
+			countLength = 0;
+			countUpper = 0;
+			countLower = 0;
+			countSpecial = 0;
 		
 		}
-
+		
+		// Closing banner
+		System.out.println("\nTotal password generated: " + countTotal);
+		System.out.println("\nThank you for using the password generator game. Good bye.");
 	}
 
 }
