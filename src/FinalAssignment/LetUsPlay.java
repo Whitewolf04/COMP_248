@@ -110,7 +110,7 @@ public class LetUsPlay {
 		do {
 			// Execute the first turn
 			Player.executeTurn(gamePlayers[0], gamePlayers[1], myDie, myBoard);
-			win = Player.checkWin(gamePlayers[0], gamePlayers[1], myBoard); // Check if the first player has won
+			win = Player.won(gamePlayers[0], gamePlayers[1], myBoard); // Check if the first player has won
 			
 			if(win) { // If win is true, break out of the loop and end the game
 				break;
@@ -118,7 +118,7 @@ public class LetUsPlay {
 			
 			// Execute turn for the second player and check winning condition
 			Player.executeTurn(gamePlayers[1], gamePlayers[0], myDie, myBoard);
-			win = Player.checkWin(gamePlayers[1], gamePlayers[0], myBoard); // Check if the second player has won
+			win = Player.won(gamePlayers[1], gamePlayers[0], myBoard); // Check if the second player has won
 
 			if(win) { // If win is true, break out of the loop and end the game
 				break;
