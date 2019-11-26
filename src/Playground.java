@@ -3,7 +3,8 @@ public class Playground {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		System.out.println(Math.pow(3,  4));
+		String myString = "Hello\nChao xin tat ca ba con co bac";
+		System.out.println(myString);
 		
-}
+	}
 }
