@@ -3,9 +3,15 @@ public class Playground {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String myInt = "123456";
-		int myString;
-		myString = Integer.parseInt(myInt);
-		System.out.println(myString/10);
+		System.out.println(Method(4, 5, 6));
+	}
+	public static int Method(int ...a){
+		int count = 0;
+		for(int i:a) {
+			if(i >= 5) {
+				count += 1;
+			}
+		}
+		return(count);
 	}
 }
